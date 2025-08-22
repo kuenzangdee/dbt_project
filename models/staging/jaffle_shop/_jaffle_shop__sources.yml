@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: raw
+    schema: jaffle_shop
+    tables:
+      - name: customers
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+              
+      - name: orders
+        freshness: 
+          warn_after:
+            count: 1
+            period: day
+          error_after:
+            count: 365
+            period: day
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+              
+        
+        
